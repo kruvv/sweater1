@@ -40,7 +40,7 @@ public class RegistrationController {
         if(isActivated) {
             model.addAttribute("message", "User successfully activated");
         } else {
-            model.addAttribute("message", "Activated code is not found");
+            model.addAttribute("message", "Activated code is not found!");
         }
 
         return "login";

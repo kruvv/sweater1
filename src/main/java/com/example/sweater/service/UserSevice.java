@@ -53,6 +53,7 @@ public class UserSevice implements UserDetailsService {
         return true;
     }
 
+
     public boolean activateUser(String code) {
         User user = userRepo.findByActivationCode(code);
 
