@@ -67,4 +67,30 @@ public class UserSevice implements UserDetailsService {
 
         return true;
     }
+
+    public boolean addUser(User user){
+        User userFromDb = userRepo.findByUsername(user.getUsername());
+
+        if(userFromDb != null){
+            return false;
+        }
+
+        user.setActive(true);
+        user.setRoles(Collections.singleton(Role.USER));
+        user.setActivationCode(UUID.randomUUID().toString());
+
+        userRepo.save(user);
+
+        if(!StringUtils.isEmpty(user.getEmail())){
+            String message = String.format(
+                    "Hello, %s! \n" +
+                            "Welcom to Sweater. Please, visit next link: http://localhost/8080/activate/%s"
+                    user.getUsername(),
+                    user.getActivationCode();
+            );
+            mailSender.send(user.getEmail(), "Activation code", message);
+        }
+
+        return true;
+    }
 }
