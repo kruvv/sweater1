@@ -28,10 +28,12 @@ public class UserSevice implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username);
-        if(user == null) {
+
+        if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-            return user;
+
+        return user;
     }
 
     public boolean addUser(User user) {

@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collector;
@@ -63,7 +62,7 @@ public class MainController {
     ) throws IOException {
         message.setAuthor(user);
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
             model.mergeAttributes(errorsMap);
@@ -85,6 +84,7 @@ public class MainController {
             }
 
             model.addAttribute("message", null);
+
             messageRepo.save(message);
         }
 
@@ -94,6 +94,4 @@ public class MainController {
 
         return "main";
     }
-
-
 }
