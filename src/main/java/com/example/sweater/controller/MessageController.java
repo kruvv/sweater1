@@ -96,7 +96,11 @@ public class MessageController {
             File uploadDir = new File(uploadPath);
 
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                if(uploadDir.mkdir()){
+                    System.out.println("Create directory");
+                }else {
+                    System.out.println("Error create directory");
+                }
             }
 
             String uuidFile = UUID.randomUUID().toString();
